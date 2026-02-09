@@ -1,0 +1,59 @@
+<h2>{{ isEditing ? 'Edit Student' : 'Add Student' }}</h2>
+
+<form (ngSubmit)="isEditing ? updateStudent() : addStudent()">
+
+  <input
+    [(ngModel)]="student.name"
+    name="name"
+    placeholder="Name"
+    required>
+
+  <input
+    type="number"
+    [(ngModel)]="student.age"
+    name="age"
+    placeholder="Age"
+    required>
+
+  <input
+    [(ngModel)]="student.email"
+    name="email"
+    placeholder="Email"
+    required>
+
+  <button type="submit">
+    {{ isEditing ? 'Update' : 'Add' }}
+  </button>
+
+  <button type="button" *ngIf="isEditing" (click)="resetForm()">
+    Cancel
+  </button>
+
+</form>
+
+<hr>
+
+<h2>Students List</h2>
+
+<table border="1" cellpadding="8">
+
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let s of students">
+    <td>{{s.id}}</td>
+    <td>{{s.name}}</td>
+    <td>{{s.age}}</td>
+    <td>{{s.email}}</td>
+    <td>
+      <button (click)="editStudent(s)">Edit</button>
+      <button (click)="deleteStudent(s.id)">Delete</button>
+    </td>
+  </tr>
+
+</table>
